@@ -1,23 +1,31 @@
 import { connect } from 'react-redux';
 import * as actions from '../actions';
+import { Link } from 'react-router-dom';
+import Payments from './Payments';
 
 function Header({ auth }) {
   function renderContent() {
     if (auth === null) {
       return;
     } else if (auth === false) {
-      return <li><a href='/auth/google'>Login With Google</a></li>;
+      return <li><a href="/auth/google">Login With Google</a></li>;
     } else {
-      return <li><a href='/api/logout'>Logout</a></li>;
+      return [
+        <li key="1"><Payments /></li>,
+        <li key="2"><a href="/api/logout">Logout</a></li>
+      ];
     }
   }
 
   return (
     <nav>
       <div className="nav-wrapper">
-        <a href="/" className="left brand-logo">
+        <Link
+          to={auth ? '/surveys' : '/'}
+          className="left brand-logo"
+        >
           Emaily
-        </a>
+        </Link>
         <ul className="right">
           {renderContent()}
         </ul>
@@ -33,4 +41,4 @@ function mapStateToProps({ auth }) {
   return { auth };
 }
 
-export default connect(mapStateToProps, actions)(Header);
+export default connect(mapStateToProps)(Header);
