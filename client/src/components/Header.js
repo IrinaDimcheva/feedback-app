@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import * as actions from '../actions';
 import { Link } from 'react-router-dom';
 import Payments from './Payments';
 
@@ -35,9 +34,6 @@ function Header({ auth }) {
   );
 }
 
-// function mapStateToProps(state) {
-//   return { auth: state.auth };
-// }
 function mapStateToProps({ auth }) {
   return { auth };
 }
